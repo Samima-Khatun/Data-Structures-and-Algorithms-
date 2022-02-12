@@ -1,0 +1,55 @@
+Large Factorial
+Problem Description
+Given a number A. Find the fatorial of the number.
+Problem Constraints
+1 <= A <= 100
+Input Format
+First and only argument is the integer A.
+Output Format
+Return a string, the factorial of A.
+Example Input
+Input 1:
+A = 2
+Input 2:
+A = 3
+Example Output
+Output 1:
+ 2
+Output 2:
+ 6
+Example Explanation
+Explanation 1:
+2! = 2 .
+Explanation 2:
+3! = 6 .
+
+Link - https://www.interviewbit.com/problems/large-factorial/
+
+public class Solution {
+    public String solve(int A) {
+        String ans = "";
+        int res[] = new int[500];
+        res[0] = 1;
+        int resSize = 1; 
+        for(int i = 2; i <= A; i++){
+            resSize = multiply(res, i, resSize);
+        }
+        for(int i = resSize-1; i >= 0; i--){
+            ans += res[i];
+        }
+        return ans;
+    }
+    int multiply(int []res, int i, int resSize){
+        int carry = 0;
+        for(int j = 0; j < resSize; j++){
+            int mul = res[j] * i + carry;
+            res[j] = mul % 10;
+            carry = mul / 10;
+        }
+        while(carry != 0){
+            res[resSize++] = carry % 10;
+            carry = carry / 10;
+        }
+        return resSize;
+    }
+}
